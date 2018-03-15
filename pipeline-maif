@@ -14,14 +14,14 @@ spec:
       jenkinsfile: |-
         node('') {
           stage 'buildInDevelopment'
-            openshiftBuild(namespace:'dev-99',buildConfig: 'welcome-99', showBuildLogs: 'true')
+            openshiftBuild(namespace:'dev-099',buildConfig: 'welcome-099', showBuildLogs: 'true')
           stage 'deployInDevelopment'
-            openshiftDeploy(namespace:'dev-99',deploymentConfig: 'welcome-99')
-            openshiftScale(namespace:'dev-99',deploymentConfig: 'welcome-99',replicaCount: '5')
+            openshiftDeploy(namespace:'dev-099',deploymentConfig: 'welcome-099')
+            openshiftScale(namespace:'dev-099',deploymentConfig: 'welcome-099',replicaCount: '5')
           stage 'deployInQA'
-            openshiftTag(namespace: 'dev-99', sourceStream: 'welcome-99',  sourceTag: 'latest', destinationStream: 'welcome-99', destinationTag: 'promoteToQA')
-            openshiftDeploy(namespace:'qa-99',deploymentConfig: 'welcome-99')
-            openshiftScale(namespace:'qa-99',deploymentConfig: 'welcome-99',replicaCount: '5')
+            openshiftTag(namespace: 'dev-099', sourceStream: 'welcome-099',  sourceTag: 'latest', destinationStream: 'welcome-099', destinationTag: 'promoteToQA')
+            openshiftDeploy(namespace:'qa-099',deploymentConfig: 'welcome-099')
+            openshiftScale(namespace:'qa-099',deploymentConfig: 'welcome-099',replicaCount: '5')
         }
   output:
   resources:
