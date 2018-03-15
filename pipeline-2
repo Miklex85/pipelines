@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: sample-pipeline
+  labels:
+    app: jenkins-pipeline-example
+    name: sample-pipeline
+    template: application-template-sample-pipeline
+spec:
+  runPolicy: Serial
+  strategy:
+    type: JenkinsPipeline
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        node('') {
+          stage 'buildInDevelopment'
+            openshiftBuild(namespace:'dev-2',buildConfig: 'welcome-2', showBuildLogs: 'true')
+          stage 'deployInDevelopment'
+            openshiftDeploy(namespace:'dev-2',deploymentConfig: 'welcome-2')
+            openshiftScale(namespace:'dev-2',deploymentConfig: 'welcome-2',replicaCount: '5')
+          stage 'deployInQA'
+            openshiftTag(namespace: 'dev-2', sourceStream: 'welcome-2',  sourceTag: 'latest', destinationStream: 'welcome-2', destinationTag: 'promoteToQA')
+            openshiftDeploy(namespace:'qa-2',deploymentConfig: 'welcome-2')
+            openshiftScale(namespace:'qa-2',deploymentConfig: 'welcome-2',replicaCount: '5')
+        }
+  output:
+  resources:
+  postCommit:
