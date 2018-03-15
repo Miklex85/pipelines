@@ -14,11 +14,8 @@
 		"strategy": {
 			"type": "JenkinsPipeline",
 			"jenkinsPipelineStrategy": {
-				"jenkinsfile": "node('') { stage 'buildInDevelopment' openshiftBuild(namespace:'dev',buildConfig: 'welcome', showBuildLogs: 'true') stage 'deployInDevelopment' openshiftDeploy(namespace:'dev',deploymentConfig: 'welcome') openshiftScale(namespace:'dev',deploymentConfig: 'welcome',replicaCount: '5') stage 'deployInQA' openshiftTag(namespace: 'dev', sourceStream: 'welcome',  sourceTag: 'latest', destinationStream: 'welcome', destinationTag: 'promoteToQA') openshiftDeploy(namespace:'qa',deploymentConfig: 'welcome') openshiftScale(namespace:'qa',deploymentConfig: 'welcome',replicaCount: '5')}"
+				"jenkinsfile": "node('') { stage 'buildInDevelopment' openshiftBuild(namespace:'dev-099',buildConfig: 'welcome-099', showBuildLogs: 'true') stage 'deployInDevelopment' openshiftDeploy(namespace:'dev-099',deploymentConfig: 'welcome-099') openshiftScale(namespace:'dev-099',deploymentConfig: 'welcome-099',replicaCount: '5') stage 'deployInQA' openshiftTag(namespace: 'dev-099', sourceStream: 'welcome-099',  sourceTag: 'latest', destinationStream: 'welcome-099', destinationTag: 'promoteToQA') openshiftDeploy(namespace:'qa-099',deploymentConfig: 'welcome-099') openshiftScale(namespace:'qa-099',deploymentConfig: 'welcome-099',replicaCount: '5')}"
 			}
-		},
-		"output": null,
-		"resources": null,
-		"postCommit": null
+		}
 	}
 }
